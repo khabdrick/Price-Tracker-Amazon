@@ -3,6 +3,9 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 
 import re # to use regular expressions in the project
+# I solved these kinds of problems using the webdrive manager.
+
+# You can automatically use the correct chromedriver by using the webdrive-manager. Install the webdrive-manager:
 
 
 def get_url(search_text):
@@ -47,7 +50,7 @@ def main(search_term):
     
     options.headless = False #choose if we want the web browser to be open when doing the crawling 
     # options.use_chromium = True
-    driver = webdriver.Chrome('/home/muhammed/Desktop/dev/blog-repo/selenium-tutorial/chromedriver')
+    driver = webdriver.Chrome('/home/muhammed/Desktop/dev/blog-repo/twilioXseleniumXpython/chromedriver')
 
     records = []
     url = get_url(search_term)
@@ -60,7 +63,7 @@ def main(search_term):
             record = extract_record(item)
             if record:
                 records.append(record)
-    
+                print(record)
     driver.close()
   
 
