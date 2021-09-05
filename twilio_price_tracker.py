@@ -48,14 +48,14 @@ def main(search_term):
     # startup the webdriver
     options=Options()
     
-    options.headless = False #choose if we want the web browser to be open when doing the crawling 
+    options.headless = True #choose if we want the web browser to be open when doing the crawling 
     # options.use_chromium = True
-    driver = webdriver.Chrome('/home/muhammed/Desktop/dev/blog-repo/twilioXseleniumXpython/chromedriver')
+    driver = webdriver.Chrome('/home/muhammed/Desktop/dev/blog-repo/twilioXseleniumXpython/chromedriver',options=options)
 
     records = []
     url = get_url(search_term)
     
-    for page in range(1, 5):
+    for page in range(1, 3):
         driver.get(url.format(page))
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         results = soup.find_all('div', {'data-component-type': 's-search-result'})
@@ -63,8 +63,10 @@ def main(search_term):
             record = extract_record(item)
             if record:
                 records.append(record)
-                print(record)
-    driver.close()
+                # print(record)
+    # driver.close() 
+    for titles, prices in records:
+        print(prices)
   
 
 # # Retieve data
@@ -83,4 +85,4 @@ def main(search_term):
 #     print(details_list)
 
 
-main("sneakers")
+main("redmi")
