@@ -1,12 +1,16 @@
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from twilio.rest import Client
+ 
 
-import re # to use regular expressions in the project
 # I solved these kinds of problems using the webdrive manager.
 
 # You can automatically use the correct chromedriver by using the webdrive-manager. Install the webdrive-manager:
+account_sid = "AC93642d372e8e6635f97a1f70e9010b77"
+auth_token = "f4ff9d1387e26c23635ec222ff249732"
 
+client = Client(account_sid, auth_token)
 
 def get_url(search_text):
     """Generate a url from search text"""
@@ -53,6 +57,7 @@ def main(search_term):
     driver = webdriver.Chrome('/home/muhammed/Desktop/dev/blog-repo/twilioXseleniumXpython/chromedriver',options=options)
 
     records = []
+    a=[]
     url = get_url(search_term)
     
     for page in range(1, 3):
@@ -63,26 +68,17 @@ def main(search_term):
             record = extract_record(item)
             if record:
                 records.append(record)
-                # print(record)
-    # driver.close() 
     for titles, prices in records:
-        print(prices)
-  
+        a.append(prices)
+    print(len(a))
 
-# # Retieve data
-# all_sneakers = client.query(
-#    q.paginate(
-#        q.match(q.index("Allsneakers"))  #add the name of the index you created
-#    ) 
-# )
+    client.messages.create(
+        # to send SMS to mobile phone
+        to="+2349064096043",
+        from_="+14692840596",
+        body=f"There are {len(a)} iPhones less than that amount"
+    )
 
-# all_sneakers_list = [all_sneakers["data"]]
-# result = re.findall("\d+", str(all_sneakers_list)) #find all the number in the JSON, that will be the ids 
-
-# for i in range(0, len(result)):
-#     sneaker_details = client.query(q.get(q.ref(q.collection("shoes"), result[i])))
-#     details_list = [sneaker_details["data"]]
-#     print(details_list)
 
 
 main("redmi")
