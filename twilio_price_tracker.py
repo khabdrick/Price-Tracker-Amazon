@@ -44,7 +44,7 @@ def extract_record(single_record):
     
     return result
 
-def main(search_term):
+def main(search_term, max_price):
 
 
     """Run main program routine"""
@@ -57,7 +57,7 @@ def main(search_term):
     driver = webdriver.Chrome('/home/muhammed/Desktop/dev/blog-repo/twilioXseleniumXpython/chromedriver',options=options)
 
     records = []
-    a=[]
+    prices_list=[]
     url = get_url(search_term)
     
     for page in range(1, 3):
@@ -69,16 +69,24 @@ def main(search_term):
             if record:
                 records.append(record)
     for titles, prices in records:
-        a.append(prices)
-    print(len(a))
+        prices_list.append(prices)
 
+
+    new_prices= [s.replace("$", "").replace(',',"") for s in prices_list]
+    print(new_prices)
+    new=[]
+    prices_float = [float(i) for i in new_prices]
+    for i in prices_float:
+        
+        if i < max_price:
+            new.append(i)
+    # print(new)
     client.messages.create(
         # to send SMS to mobile phone
-        to="+2349064096043",
+        to="+2348112398610",
         from_="+14692840596",
-        body=f"There are {len(a)} iPhones less than that amount"
+        body=f"There are {len(new)} rolex watchs less than than amount"
     )
+       
 
-
-
-main("redmi")
+main("rolex", 10000)
