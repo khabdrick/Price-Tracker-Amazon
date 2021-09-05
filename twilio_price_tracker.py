@@ -7,8 +7,8 @@ from twilio.rest import Client
 # I solved these kinds of problems using the webdrive manager.
 
 # You can automatically use the correct chromedriver by using the webdrive-manager. Install the webdrive-manager:
-account_sid = "AC93642d372e8e6635f97a1f70e9010b77"
-auth_token = "f4ff9d1387e26c23635ec222ff249732"
+account_sid = "your_sid"
+auth_token = "your_auth_token"
 
 client = Client(account_sid, auth_token)
 
