@@ -1,14 +1,13 @@
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+
 from twilio.rest import Client
  
 
-# I solved these kinds of problems using the webdrive manager.
-
-# You can automatically use the correct chromedriver by using the webdrive-manager. Install the webdrive-manager:
-account_sid = "your_sid"
-auth_token = "your_auth_token"
+account_sid = "AC93642d372e8e6635f97a1f70e9010b77"
+auth_token = "8a6a967188a6e1b6c7658b113c187246"
 
 client = Client(account_sid, auth_token)
 
@@ -54,7 +53,7 @@ def main(search_term, max_price):
     
     options.headless = True #choose if we want the web browser to be open when doing the crawling 
     # options.use_chromium = True
-    driver = webdriver.Chrome('/home/muhammed/Desktop/dev/blog-repo/twilioXseleniumXpython/chromedriver',options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install(),options=options)
 
     records = []
     prices_list=[]
